@@ -1,14 +1,15 @@
 pull_request_rules:
   - name: automatic merge on CI success
     conditions:
-      - status-success=Build
+      - status-success=Build (matrix)
       - label=automerge
     actions:
       merge:
         method: rebase
+        strict: true
   - name: remove automerge label on CI failure
     conditions:
-      - status-failure=Build
+      - status-failure=Build (matrix)
       - label=automerge
     actions:
       label:
@@ -16,7 +17,7 @@ pull_request_rules:
           - automerge
   - name: remove outdated reviews
     conditions:
-      - base=master
+      - base=main
     actions:
       dismiss_reviews:
         changes_requested: true
