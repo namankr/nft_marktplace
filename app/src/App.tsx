@@ -60,9 +60,9 @@ function App() {
             </WalletProvider>
             </div>
             <div className="content">
-              <UploadNft />
               Tokens:
               <TokenList />
+              <UploadNft />
             </div>
         </ConnectionProvider>
     );
