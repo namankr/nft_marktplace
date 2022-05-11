@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+.wallet-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  background-color: whitesmoke;
+  padding: 10px;
+}
+
+.wallet-buttons * {
+  margin-left: 5px !important;
+}
