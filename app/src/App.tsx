@@ -20,6 +20,7 @@ import {
   TorusWalletAdapter,
 } from '@solana/wallet-adapter-wallets';
 import { clusterApiUrl } from '@solana/web3.js';
+import UploadNft from './utils/upload-nft';
 
 function App() {
     // The network can be set to 'devnet', 'testnet', or 'mainnet-beta'.
@@ -48,7 +49,7 @@ function App() {
                 <WalletModalProvider>
                     <WalletMultiButton />
                     <WalletDisconnectButton />
-                    My App
+                    <UploadNft />
                     { /* Your app's components go here, nested within the context providers. */ }
                 </WalletModalProvider>
             </WalletProvider>
