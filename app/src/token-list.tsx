@@ -1,62 +1,42 @@
-import React, { useState } from 'react';
+import React, {
+  useEffect,
+  useState,
+} from 'react';
 
 import {
   useConnection,
   useWallet,
 } from '@solana/wallet-adapter-react';
 import {
-  AccountInfo,
-  ParsedAccountData,
   PublicKey,
+  TokenAmount,
 } from '@solana/web3.js';
 
 export const TokenList = () => {
     const { connection } = useConnection();
-    const { publicKey, sendTransaction } = useWallet();
+    const wallet = useWallet();
 
-    const [tokens, setTokens] = useState<Array<{
-        pubkey: PublicKey;
-        account: AccountInfo<Buffer | ParsedAccountData>;
-      }> >([]);
+    const [tokenBalance, setTokenBalance] = useState<TokenAmount>();
   
       
-    // useEffect(() => {
-    //     async function fetchTokens() {
-    //         if (!publicKey) throw new WalletNotConnectedError();
+    useEffect(() => {
+        async function fetchTokens() {
+            if (!wallet.publicKey) return;
 
-    //         const tokens = await connection.getParsedProgramAccounts(
-    //             new PublicKey("HwAXhSmmvwBByqqJPRCChtXCeiAkFqstMpwxqjZXuf9F"),
-    //             {
-    //               filters: [
-    //                 {
-    //                   dataSize: 165, // number of bytes
-    //                 },
-    //                 {
-    //                   memcmp: {
-    //                     offset: 32, // number of bytes
-    //                     bytes: publicKey.toString(), // base58 encoded string
-    //                   },
-    //                 },
-    //               ],
-    //             }
-    //           );
+            const tokenBalance = (await connection.getTokenAccountBalance(new PublicKey('HwAXhSmmvwBByqqJPRCChtXCeiAkFqstMpwxqjZXuf9F'))).value;
 
-    //           setTokens(tokens);
-    //     }
+            setTokenBalance(tokenBalance);
+        }
 
-    //     fetchTokens();
-    // }, []);
+        fetchTokens();
+    }, [wallet]);
       
     return (
         <div>
-            PubKey: {publicKey?.toString()}
-            {
-                tokens.map(token => (
-                    <div>
-                        Token: {token.pubkey.toString()}
-                    </div>
-                ))
-            }
+            PubKey: {wallet.publicKey?.toString()}
+            <p>Token Balance for your token: { tokenBalance?.uiAmountString }</p>
+            
         </div>
     );
+
 };
