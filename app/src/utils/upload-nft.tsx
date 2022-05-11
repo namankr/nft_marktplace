@@ -2,8 +2,10 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 // import SendIcon from "@mui/icons-material/Send";
 import * as fs from "fs";
+// import fs from "fs";
 import CreateMetaData from "../constants";
 import Arweave from "arweave";
+import { readFileSync } from "fs";
 
 export default function UploadNft() {
   async function uploadImage() {
@@ -15,7 +17,8 @@ export default function UploadNft() {
       logging: false,
     });
     // const fs = require('fs');
-    const data = fs.readFileSync("../images/unnamed.jpg");
+    const data = readFileSync("../images/unnamed.jpg");
+    // const data = fs.readFileSync("../images/unnamed.jpg");
     console.log(`the image file path - ${data}`);
 
     const transaction = await arweave.createTransaction({
