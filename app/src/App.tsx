@@ -21,6 +21,8 @@ import {
 } from '@solana/wallet-adapter-wallets';
 import { clusterApiUrl } from '@solana/web3.js';
 
+import { TokenList } from './token-list';
+
 // Default styles that can be overridden by your app
 require('@solana/wallet-adapter-react-ui/styles.css');
 
@@ -56,7 +58,10 @@ function App() {
                 </WalletModalProvider>
             </WalletProvider>
             </div>
-            <div className="content">MyApp</div>
+            <div className="content">
+              Tokens:
+              <TokenList />
+            </div>
         </ConnectionProvider>
     );
 }
