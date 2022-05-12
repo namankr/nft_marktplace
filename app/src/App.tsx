@@ -21,8 +21,7 @@ import {
 } from '@solana/wallet-adapter-wallets';
 import { clusterApiUrl } from '@solana/web3.js';
 
-import { TokenList } from './token-list';
-import UploadNft from './utils/upload-nft';
+import { FileUpload } from './file-upload';
 
 // Default styles that can be overridden by your app
 require('@solana/wallet-adapter-react-ui/styles.css');
@@ -59,9 +58,7 @@ function App() {
           </div>
 
           <div className="content">
-            <UploadNft />
-            Tokens:
-            <TokenList />
+            <FileUpload />
           </div>
 
           { /* Your app's components go here, nested within the context providers. */}
